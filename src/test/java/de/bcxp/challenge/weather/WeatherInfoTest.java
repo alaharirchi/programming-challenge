@@ -1,6 +1,6 @@
 package de.bcxp.challenge.weather;
 
-import de.bcxp.challenge.weather.exceptions.DataException;
+import de.bcxp.challenge.weather.exceptions.WeatherCalculationException;
 import org.junit.jupiter.api.Test;
 
 import static de.bcxp.challenge.weather.WeatherReader.MAX_TEMP_HEADER;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WeatherInfoTest {
 
     @Test
-    void givenTemperatureMeasurements() throws DataException {
+    void givenTemperatureMeasurements() throws WeatherCalculationException {
         // given
         WeatherInfo day = new WeatherInfo("1");
         day.setMeasurement(MAX_TEMP_HEADER, 25.0);
@@ -24,12 +24,12 @@ class WeatherInfoTest {
     }
 
     @Test
-    void givenMissingTemperatureMeasurements() throws DataException {
+    void givenMissingTemperatureMeasurements() {
         // given
         WeatherInfo day = new WeatherInfo("1");
         day.setMeasurement(MAX_TEMP_HEADER, 25.0);
 
         // when, then
-        assertThrows(DataException.class, () -> day.getSpread());
+        assertThrows(WeatherCalculationException.class, () -> day.getSpread());
     }
 }

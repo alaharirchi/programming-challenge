@@ -1,6 +1,6 @@
 package de.bcxp.challenge.weather;
 
-import de.bcxp.challenge.weather.exceptions.DataException;
+import de.bcxp.challenge.weather.exceptions.WeatherCalculationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +30,11 @@ public class WeatherInfo {
         return day;
     }
 
-    public Double getSpread() throws DataException {
+    public Double getSpread() throws WeatherCalculationException {
         Double maxTemp = measurements.get(MAX_TEMP_HEADER);
         Double minTemp = measurements.get(MIN_TEMP_HEADER);
         if ((maxTemp == null) || (minTemp == null)) {
-            throw new DataException("Cannot calculate temperature spread: Not enough data");
+            throw new WeatherCalculationException("Cannot calculate temperature spread: Not enough data");
         }
         return maxTemp - minTemp;
     }
