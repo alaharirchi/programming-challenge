@@ -1,7 +1,6 @@
 package de.bcxp.challenge.weather;
 
-import de.bcxp.challenge.weather.exceptions.DataException;
-import de.bcxp.challenge.weather.exceptions.InputException;
+import de.bcxp.challenge.weather.exceptions.WeatherInputException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import static de.bcxp.challenge.weather.WeatherReader.MIN_TEMP_HEADER;
 class MonthlyWeatherTest {
 
     @Test
-    void getSmallestSpread() throws DataException, InputException {
+    void getSmallestSpread() throws WeatherInputException {
 
         // given
         WeatherInfo day1 = new WeatherInfo("1",
@@ -40,7 +39,7 @@ class MonthlyWeatherTest {
     }
 
     @Test
-    void givenMissingMeasurementsForSomeDay_ThenCalculateForTheRest() throws DataException, InputException {
+    void givenMissingMeasurementsForSomeDay_ThenCalculateForTheRest() throws WeatherInputException {
 
         // given
         WeatherInfo day1 = new WeatherInfo("1",
@@ -66,7 +65,7 @@ class MonthlyWeatherTest {
     }
 
     @Test
-    void givenMultipleDaysWithSmallestSpread() throws DataException, InputException {
+    void givenMultipleDaysWithSmallestSpread() throws WeatherInputException {
 
         // given
         WeatherInfo day1 = new WeatherInfo("1",
@@ -101,7 +100,7 @@ class MonthlyWeatherTest {
         }
 
         @Override
-        public List<WeatherInfo> read() throws InputException, DataException {
+        public List<WeatherInfo> read() throws WeatherInputException {
             return returnValue;
         }
     }

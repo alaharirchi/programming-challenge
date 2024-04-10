@@ -1,12 +1,13 @@
 package de.bcxp.challenge.weather;
 
-import de.bcxp.challenge.weather.exceptions.DataException;
-import de.bcxp.challenge.weather.exceptions.InputException;
+import com.opencsv.exceptions.CsvException;
+import de.bcxp.challenge.weather.exceptions.WeatherInputException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.bcxp.challenge.weather.CsvWeatherReader.checkFormat;
 import static de.bcxp.challenge.weather.CsvWeatherReader.checkSanity;
 import static de.bcxp.challenge.weather.WeatherReader.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ class CsvWeatherReaderTest {
 
     @Test
     void givenNonexistentFile() {
-        assertThrows(InputException.class, () -> new CsvWeatherReader("w3ather.csv").read());
+        assertThrows(WeatherInputException.class, () -> new CsvWeatherReader("w3ather.csv").read());
     }
 
     @Test
@@ -36,17 +37,17 @@ class CsvWeatherReaderTest {
         List<String[]> lines = List.of(headers, measurements1, measurements2);
 
         // when, then
-        assertDoesNotThrow(() -> checkSanity(lines));
+        assertDoesNotThrow(() -> checkFormat(lines));
     }
 
     @Test
     void givenNullData() {
-        assertThrows(DataException.class, () -> checkSanity(null));
+        assertThrows(CsvException.class, () -> checkFormat(null));
     }
 
     @Test
     void givenEmptyData() {
-        assertThrows(DataException.class, () -> checkSanity(new ArrayList<>()));
+        assertThrows(CsvException.class, () -> checkFormat(new ArrayList<>()));
     }
 
     @Test
@@ -57,7 +58,7 @@ class CsvWeatherReaderTest {
         lines.add(headers);
 
         // when, then
-        assertThrows(DataException.class, () -> checkSanity(lines));
+        assertThrows(CsvException.class, () -> checkFormat(lines));
     }
 
     @Test
@@ -69,7 +70,7 @@ class CsvWeatherReaderTest {
         List<String[]> lines = List.of(headers, measurements);
 
         // when. then
-        assertThrows(DataException.class, () -> checkSanity(lines));
+        assertThrows(CsvException.class, () -> checkFormat(lines));
     }
 
     @Test
@@ -81,7 +82,7 @@ class CsvWeatherReaderTest {
         List<String[]> lines = List.of(headers, measurements);
 
         // when, then
-        assertThrows(DataException.class, () -> checkSanity(lines));
+        assertThrows(CsvException.class, () -> checkFormat(lines));
     }
 
     @Test
@@ -93,6 +94,6 @@ class CsvWeatherReaderTest {
         List<String[]> lines = List.of(headers, measurements);
 
         // when, then
-        assertThrows(DataException.class, () -> checkSanity(lines));
+        assertThrows(WeatherInputException.class, () -> checkSanity(lines));
     }
 }

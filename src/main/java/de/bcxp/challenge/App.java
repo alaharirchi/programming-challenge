@@ -2,8 +2,7 @@ package de.bcxp.challenge;
 
 import de.bcxp.challenge.weather.CsvWeatherReader;
 import de.bcxp.challenge.weather.MonthlyWeather;
-import de.bcxp.challenge.weather.exceptions.DataException;
-import de.bcxp.challenge.weather.exceptions.InputException;
+import de.bcxp.challenge.weather.exceptions.WeatherInputException;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ public final class App {
      * This is the main entry method of your program.
      * @param args The CLI arguments passed
      */
-    public static void main(String... args) throws DataException, InputException {
+    public static void main(String... args) throws WeatherInputException {
 
         MonthlyWeather report = new MonthlyWeather(new CsvWeatherReader("de/bcxp/challenge/weather.csv"));
         List<Map.Entry<String, Double>> results = report.getSmallestSpread();

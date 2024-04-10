@@ -1,7 +1,7 @@
 package de.bcxp.challenge.weather.exceptions;
 
-public class InputException extends Exception {
-    public InputException(String errorMessage, Throwable err) {
+public class WeatherInputException extends Exception {
+    public WeatherInputException(String errorMessage, Throwable err) {
         super(errorMessage, err);
     }
 }
