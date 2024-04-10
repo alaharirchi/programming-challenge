@@ -17,8 +17,17 @@ public class WeatherInfo {
         measurements = new HashMap<>();
     }
 
+    WeatherInfo(String day, Map<String, Double> measurements) {
+        this.day = day;
+        this.measurements = measurements;
+    }
+
     public void setMeasurement(String item, double value) {
         measurements.put(item, value);
+    }
+
+    public String getDay() {
+        return day;
     }
 
     public Double getSpread() throws DataException {
