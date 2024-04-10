@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class MonthlyWeather {
     private List<WeatherInfo> weatherInfos;
 
-    MonthlyWeather(WeatherReader reader) throws DataException, InputException {
+    public MonthlyWeather(WeatherReader reader) throws DataException, InputException {
         weatherInfos = reader.read();
     }
 
-    List<Map.Entry<String, Double>> getSmallestSpread() {
+    public List<Map.Entry<String, Double>> getSmallestSpread() {
         Map<String, Double> spreads = weatherInfos.stream()
                 .collect(Collectors.toMap(e -> e.getDay(), e -> {
                     try {
